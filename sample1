@@ -1,0 +1,18 @@
+provider "aws" {
+region = "ap-south-1"
+access_key = "AKIAQIZETP44MXFSGRVZ"
+secret_key = "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"
+}
+resource "aws_instance" "key1" {
+ami = "ami-0caf778a172362f1c"
+instance_type = "t2.micro"
+availability_zone = "ap-south-1a"
+tags = {
+Name = "CCIT"
+Environment = "DEV"
+}
+root_block_device {
+volume_size = 10
+}
+count = 2
+}
