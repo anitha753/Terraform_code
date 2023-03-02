@@ -175,3 +175,37 @@ protocol = "-1"
 cidr_blocks = ["0.0.0.0/0"]
 }
 }
+
+
+/////////////////////////////code for   main.tf   and   provider.tf    //////////////
+ root@ip-172-31-36-105:~/modules# cat main.tf
+module "module-1" {
+source = "./instance"
+myami = "ami-0caf778a172362f1c"
+itype = "t2.micro"
+azone = "ap-south-1a"
+kname = "mykey"
+iname = "CCIT-PROJECT"
+ename = "DEV"
+vsize = 15
+cnt = 1
+}
+module "module-2" {
+source = "./user"
+uname = "myuser"
+}
+module "module-3" {
+source = "./group"
+gname = "mygroup"
+}
+module "module-4" {
+source = "./bucket"
+bname = "mymodulesprojectforbucket"
+}
+
+root@ip-172-31-36-105:~/modules# cat provider.tf
+provider "aws" {
+region = "ap-south-1"
+access_key = "AKIAQIZETP44KJS3CLAX"
+secret_key = "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"
+}   
