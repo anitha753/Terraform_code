@@ -48,4 +48,10 @@ block_public_policy = false
 ignore_public_acls = false
 restrict_public_buckets = false
 }
-  
+root@ip-172-31-36-105:~/modules/bucket# cat versioning.tf
+resource "aws_s3_bucket_versioning" "v" {
+bucket = aws_s3_bucket.b.id
+versioning_configuration {
+status = "Enabled"
+}
+}
