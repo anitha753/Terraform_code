@@ -25,13 +25,13 @@
 
 /root@ip-172-31-36-105:~/modules/bucket# cat main.tf
 resource "aws_s3_bucket" "b" {
-name = var.bname
+bucket = var.bname
 }
 
 root@ip-172-31-36-105:~/modules/bucket# cat variable.tf
 variable "bname" {
 description = "this is for bucket name"
-type = "string"
+type = string
 }
 
 root@ip-172-31-36-105:~/modules/bucket# cat acl.tf
@@ -66,7 +66,7 @@ name = var.uname
 root@ip-172-31-36-105:~/modules/user# cat variable.tf 
 variable "uname" {
 description = "this is for user name"
-type = "string"
+type = string
 }
 
 ///////////////////////////code for group//////////////
@@ -79,14 +79,14 @@ name = var.gname
 root@ip-172-31-36-105:~/modules/group# cat variable.tf 
 variable "gname" {
 description = "this is for group name"
-type = "string"
+type = string
 }
 
 
 /////////////////////////////code for instance with security group////////////
 root@ip-172-31-36-105:~/modules/instance# cat main.tf
 resource "aws_instance" "i" {
-ami = var.ami
+ami = var.myami
 instance_type = var.itype
 availability_zone = var.azone
 key_name = var.kname
@@ -102,7 +102,7 @@ count = var.cnt
 }
 
 root@ip-172-31-36-105:~/modules/instance# cat variable.tf
-variable "ami" {
+variable "myami" {
 description = "this is for ami"
 type = string
 }
