@@ -6,9 +6,7 @@ secret_key = "fhLpjVpgBjt6GlLSNa5hdk7vb8PDwX/qrPg+pYTh"
 resource "aws_instance" "key" {
 ami="ami-0caf778a172362f1c"
 instance_type = "t2.micro"
-tags = {
-Name = var.abc
-}
+tags = var.abc
 }
 variable "abc" {
 type = map(string)
