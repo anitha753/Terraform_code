@@ -37,7 +37,7 @@ type = string
 root@ip-172-31-36-105:~/modules/bucket# cat acl.tf
 resource "aws_s3_bucket_acl" "a" {
 bucket = "${aws_s3_bucket.b.id}"
-acl = "public"
+acl = "public-read"
 }
 
 root@ip-172-31-36-105:~/modules/bucket# cat public_access_block.tf 
