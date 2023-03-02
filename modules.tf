@@ -81,3 +81,97 @@ variable "gname" {
 description = "this is for group name"
 type = "string"
 }
+
+
+/////////////////////////////code for instance with security group////////////
+root@ip-172-31-36-105:~/modules/instance# cat main.tf
+resource "aws_instance" "i" {
+ami = var.ami
+instance_type = var.itype
+availability_zone = var.azone
+key_name = var.kname
+vpc_security_group_ids = [aws_security_group.demo-sg.id]
+tags = {
+Name = var.iname
+Environment = var.ename
+}
+root_block_device {
+volume_size = var.vsize
+}
+count = var.cnt
+}
+
+root@ip-172-31-36-105:~/modules/instance# cat variable.tf
+variable "ami" {
+description = "this is for ami"
+type = string
+}
+variable "itype" {
+description = "this is for itype"
+type = string
+}
+variable "azone" {
+description = "this is for availability zone"
+type = string
+}
+variable "kname" {
+description = "this is for key name"
+type = string
+}
+variable "iname" {
+description = "this is for inatance name"
+type = string
+}
+variable "ename" {
+description = "this is for availability environment name"
+type = string
+}
+variable "vsize" {
+description = "this is for availability volume size"
+type = number
+}
+variable "cnt" {
+description = "this is for availability number of instances"
+type = number
+}
+root@ip-172-31-36-105:~/modules/instance# cat security.tf
+resource "aws_security_group" "demo-sg"{
+name = "sec-sg"
+description = "it allows all traffic"
+ingress {
+from_port = 22
+to_port = 22
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
+egress {
+from_port = 22
+to_port = 22
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
+ingress {
+from_port = 80
+to_port = 80
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
+egress {
+from_port = 80
+to_port = 80
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+}
+ingress {
+from_port = 0
+to_port = 0
+protocol = "-1"
+cidr_blocks = ["0.0.0.0/0"]
+}
+egress {
+from_port = 0
+to_port = 0
+protocol = "-1"
+cidr_blocks = ["0.0.0.0/0"]
+}
+}
