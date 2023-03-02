@@ -21,7 +21,7 @@
 
 5 directories, 14 files
 
-                                /////////////////terraform code/////
+                                ///////////////// terraform code for bucket/////
 
 /root@ip-172-31-36-105:~/modules/bucket# cat main.tf
 resource "aws_s3_bucket" "b" {
@@ -54,4 +54,30 @@ bucket = aws_s3_bucket.b.id
 versioning_configuration {
 status = "Enabled"
 }
+}
+
+///////////////////////////code for user//////////////
+    
+root@ip-172-31-36-105:~/modules/user# cat main.tf
+resource "aws_iam_user" "u" {
+name = var.uname
+}
+
+root@ip-172-31-36-105:~/modules/user# cat variable.tf 
+variable "uname" {
+description = "this is for user name"
+type = "string"
+}
+
+///////////////////////////code for group//////////////
+    
+root@ip-172-31-36-105:~/modules/group# cat main.tf
+resource "aws_iam_group" "g" {
+name = var.gname
+}
+
+root@ip-172-31-36-105:~/modules/group# cat variable.tf 
+variable "gname" {
+description = "this is for group name"
+type = "string"
 }
