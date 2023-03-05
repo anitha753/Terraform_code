@@ -240,7 +240,7 @@ root@ip-172-31-50-167:~/modules/vpc# cat route_table.tf
 resource "aws_route_table" "myrt" {
 vpc_id = aws_vpc.vp.id
 route {
-cidr_block = ["0.0.0.0/0"]
+cidr_block = "0.0.0.0/0"
 gateway_id = "aws_internet_gateway.igw.id
 }
 tags = {
@@ -251,14 +251,14 @@ Name = "my-rt-1"
 root@ip-172-31-50-167:~/modules/vpc# cat subnet.tf
 resource "aws_subnet" "mysubnet" {
 vpc_id = aws_vpc.vp.id
-cidr_block = ["10.0.1.0/24"]
+cidr_block = "10.0.1.0/24"
 tags = {
 Name = "subnet-1"
 }
 }
 root@ip-172-31-50-167:~/modules/vpc# cat main.tf
 resource "aws_vpc" "vp" {
-cidr_block = ["10.0.0.0/16"]
+cidr_block = "10.0.0.0/16"
 instance_tenancy = "default"
 enable_dns_hostnames = "true"
 tags = {
