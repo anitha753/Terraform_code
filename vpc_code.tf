@@ -243,7 +243,11 @@ route {
 cidr_block = ["0.0.0.0/0"]
 gateway_id = "aws_internet_gateway.igw.id
 }
+tags = {
+Name = "my-rt-1"
 }
+}
+
 root@ip-172-31-50-167:~/modules/vpc# cat subnet.tf
 resource "aws_subnet" "mysubnet" {
 vpc_id = aws_vpc.vp.id
